@@ -225,10 +225,10 @@ async function main() {
       alphas.push(minAlpha[0])
 
       // Highlight lowest alpha
-      const redBoxMinAlpha = document.querySelector(`#${minAlpha[1].id()}`)
       internalNodes.forEach(n => n[0].removeClass("red-outline"))
       await timeout(2000) //2000
       while (paused) await timeout(1000)
+      const redBoxMinAlpha = document.querySelector(`#${minAlpha[1].id()}`)
       redBoxMinAlpha.setAttribute("style", "border: 3px solid red;")
 
       await timeout(4000) //4000
