@@ -231,7 +231,7 @@ async function main() {
       const redBoxMinAlpha = document.querySelector(`#${minAlpha[1].id()}`)
       redBoxMinAlpha.setAttribute("style", "border: 3px solid red;")
 
-      await timeout(4000) //4000
+      await timeout(5000) //5000
       while (paused) await timeout(1000)
 
       // Prune
@@ -275,7 +275,7 @@ async function main() {
   } 
 
 }
-  
+ 
 function highlightInternalNodes() {
 
   const internalNodes = []
