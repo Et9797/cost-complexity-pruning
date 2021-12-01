@@ -164,11 +164,11 @@ function timeout(ms) {
 
 }
 
-  
 async function main() {
 
   let done = false
   let k = 1
+  let alphas = []
   while (!done) {
 
     if (cy.nodes().parent().length > 1) {
@@ -222,6 +222,8 @@ async function main() {
         return acc
       })
 
+      alphas.push(minAlpha[0])
+
       // Highlight lowest alpha
       const redBoxMinAlpha = document.querySelector(`#${minAlpha[1].id()}`)
       internalNodes.forEach(n => n[0].removeClass("red-outline"))
@@ -229,7 +231,7 @@ async function main() {
       while (paused) await timeout(1000)
       redBoxMinAlpha.setAttribute("style", "border: 3px solid red;")
 
-      await timeout(4000) //5000
+      await timeout(4000) //4000
       while (paused) await timeout(1000)
 
       // Prune
@@ -237,22 +239,34 @@ async function main() {
 
       await timeout(3000) //3000
       while (paused) await timeout(1000)
+      
+      const bestSubTreeAlpha = document.createElement("p")
+      bestSubTreeAlpha.innerHTML = `$$ T_{${k}}: \\alpha \\in [ \\, ${alphas.lastIndexOf(minAlpha[0]) == 0 ? 0: alphas[alphas.lastIndexOf(minAlpha[0]) - 1]}, ${minAlpha[0]} ) \\, $$`
+      bestSubTreeAlpha.setAttribute("style", "font-size: 18px;")
+      $(".result").append(bestSubTreeAlpha)
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub, bestSubTreeAlpha])
 
       $(".eqs").empty()
 
-      // Add redbox highlighted alpha result 
-      
       k++
-
     }
     else {
-      // reached root node Text in calculations
       const finished = document.createElement("h4")
       finished.innerHTML = "Reached root node."
       finished.setAttribute("style", "font-size: 18px;")
       $(".eqs").append(finished)
 
-      $("#prune-btn").attr("disabled", false)
+      const subtree = document.querySelector("#subtree")
+      subtree.innerHTML = `Current subtree: <span style="font-size: 30px; color: #1711d0;">Root</span>`
+
+      await timeout(2000) //2000
+      while (paused) await timeout(1000)
+      const bestSubTreeAlpha = document.createElement("p")
+      bestSubTreeAlpha.innerHTML = `$$ \\text{Root}: \\alpha \\in [ \\, ${alphas[alphas.length - 1]}, \\infty ) \\, $$`
+      bestSubTreeAlpha.setAttribute("style", "font-size: 18px;")
+      $(".result").append(bestSubTreeAlpha)
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub, bestSubTreeAlpha])
+
       $("#pause-btn").attr("disabled", true)
       $("resume-btn").attr("disabled", true)
 
@@ -262,14 +276,13 @@ async function main() {
 
 }
   
-
 function highlightInternalNodes() {
 
   const internalNodes = []
   for (const parentNode of cy.nodes().parent().toArray()) {
     const childNode = parentNode.children()
     if (childNode.successors().nodes().length > 0) {
-      // Then the node is not a leave node, i.e. an internal node
+      // Then the node is not a leaf node, i.e. an internal node
       childNode.addClass("red-outline")
       internalNodes.push([childNode, parentNode])
     }
@@ -278,7 +291,6 @@ function highlightInternalNodes() {
   return internalNodes
   
 }
-
 
 function highlightBranch(node) {
 
