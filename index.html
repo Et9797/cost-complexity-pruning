@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Cost complexity pruning visualized</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>  
+        <div class="container-1">
+            <header>
+                <h1>Cost-complexity pruning visualised</h1>
+                <a href="https://github.com/Et9797/cost-complexity-pruning-visualized" target="_blank">
+                    <img id="github-logo" src="mark-github.svg">
+                </a>
+            </header>
+            <div class="buttons">
+                <button id="prune-btn" style="width: 75%;" type="button" class="btn btn-primary btn-lg">Prune</button>
+                <br><br>
+                <button id="reset-btn" style="margin-top: -15px; width: 75%;" type="button" class="btn btn-warning btn-lg">Reset</button>
+                <br><br>
+                <button style="margin-top: -15px; width: 75%;" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#howItWorks">
+                    How it works
+                </button>
+            </div>
+            <div class="canvas">
+                <div class="tree">
+                    <h2 style="padding-left: 5px; display: inline-block;">Tree</h2>
+                    <div id="cy"></div>
+                    <div style="text-align: center; margin-top: -5px;" class="subtree-text">
+                        <span id="subtree" style="font-size: 20px;">Current subtree:</span>
+                    </div>
+                </div>
+                <div class="playback">
+                    <button id="resume-btn" style="width: 25%;" type="button" class="btn btn-success" disabled>Resume</button>
+                    <button id="pause-btn" style="width: 25%;" type="button" class="btn btn-danger" disabled>Pause</button>
+                </div>
+                <div style="text-align: left;" class="calculations">
+                    <p style="margin: auto;"><strong>Calculations</strong></p>
+                    <div class="eqs"></div>
+                </div>
+            </div>
+            <div class="result">
+                <h2>Result</h2>
+                <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+                aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
+                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
+                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+                eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+                culpa duis.</p>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="howItWorks" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">How it works</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p> Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+                    labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+                    animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+                    aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
+                    pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+                    commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
+                    proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+                    eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+                    Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+                    culpa duis. Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+                    labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+                    animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+                    aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
+                    pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+                    commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
+                    proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+                    eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+                    Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+                    culpa duis.</p>
+                    <p>\[a^2 + b^2\]</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.5/cytoscape.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.2.2/cytoscape-dagre.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="cpp.js"></script>
+    </body>
+
+</html>
