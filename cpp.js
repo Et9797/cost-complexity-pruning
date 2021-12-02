@@ -128,7 +128,6 @@ window.addEventListener("resize", () => {
   cy.fit()
 })
 
-var reset = false
 var paused = false
 
 $("#reset-btn").on("click", () => window.location.reload())
