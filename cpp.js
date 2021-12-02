@@ -168,7 +168,7 @@ async function main() {
 
   let done = false
   let k = 1
-  let alphas = []
+  const alphas = []
   while (!done) {
 
     if (cy.nodes().parent().length > 1) {
