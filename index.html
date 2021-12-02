@@ -77,10 +77,10 @@
                     </p>
                     <p>
                     \(\alpha\) goes through a continuum of values, but there is only a finite number of subtrees of a tree. 
-                    We can construct a decreasing sequence of subtrees: \[T_1 > T_2 > T_3 > . . . > Root\] such that \(T_k\) is the "smallest minimizing
-                    subtree" for \(\alpha \in [\alpha_k, \alpha_{k+1})\). It can be shown that we can obtain the next tree in the sequence simply 
-                    by just pruning the current subtree. The next subtree in the sequence is obtained by finding the non-terminal node(s) for which 
-                    \(g(t)\) (alpha value) is lowest, and subsequently pruning that node(s). The process is repeated until the root node is reached.
+                    It can be shown that we can construct a decreasing sequence of subtrees: \[T_1 > T_2 > T_3 > . . . > Root\] such that \(T_k\) is the "smallest minimizing
+                    subtree" for the range \(\alpha \in [\alpha_k, \alpha_{k+1})\). The next tree in the sequence is obtained simply 
+                    by pruning the current subtree in the sequence. Concretely, the next subtree in the sequence is obtained by finding the non-terminal node(s) for which 
+                    \(g(t)\) (alpha) is lowest, and subsequently pruning that node. The process is repeated until the root node is reached.
                     \(g(t)\) is computed as follows for all non-terminal nodes of a subtree: \[g_k(t) = \cfrac{R(t) - R(T_{k, \ t})}{|\tilde T_{k, \ t}| - 1}\]
                     where \(R(t)\) is the resubstitution error of the node, \(R(T_{k, \ t})\) the resubstitution error for the branch of that node, and
                     \(|\tilde T_{k, \ t}|\) the number of leaf nodes of that branch. The non-terminal node(s) for which \(g(t)\) is smallest will be pruned away. 
