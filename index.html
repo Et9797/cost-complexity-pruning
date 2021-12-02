@@ -83,8 +83,8 @@
                     \(g(t)\) (alpha value) is lowest, and subsequently pruning that node(s). The process is repeated until the root node is reached.
                     \(g(t)\) is computed as follows for all non-terminal nodes of a subtree: \[g_k(t) = \cfrac{R(t) - R(T_{k, \ t})}{|\tilde T_{k, \ t}| - 1}\]
                     where \(R(t)\) is the resubstitution error of the node, \(R(T_{k, \ t})\) the resubstitution error for the branch of that node, and
-                    \(|\tilde T_{k, \ t}|\) the number of leaf nodes of that branch. The non-terminal node(s) for which \(g(t)\) is smallest will be pruned. This value represents 
-                    the next alpha value in the sequence: \[\alpha_{k+1} = min(g_{k}(t))\]
+                    \(|\tilde T_{k, \ t}|\) the number of leaf nodes of that branch. The non-terminal node(s) for which \(g(t)\) is smallest will be pruned away. 
+                    This value represents the next alpha value in the sequence: \[\alpha_{k+1} = min(g_{k}(t))\]
                     </p>
                     <p>
                     For more information: 
