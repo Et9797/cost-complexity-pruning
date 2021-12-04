@@ -62,6 +62,15 @@ var cy = window.cy = cytoscape({
         'border-width': 50,
         'border-color': 'red'
       }
+    },
+
+    {
+      selector: '.fade-out-node',
+      style: {
+        'opacity': 0,
+        'transition-property': 'opacity',
+        'transition-duration': '1s'
+      } 
     }
 
   ],
@@ -234,6 +243,10 @@ async function main() {
       while (paused) await timeout(1000)
 
       // Prune
+      minAlpha[1].children().successors().addClass("fade-out-node")
+      minAlpha[1].children().successors().parent().addClass("fade-out-node")
+      await timeout(1000)
+      while (paused) await timeout(1000)
       cy.remove(minAlpha[1].children().successors().parent())
 
       await timeout(3000) //3000
