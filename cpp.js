@@ -136,14 +136,12 @@ window.addEventListener('load', () => {
 window.addEventListener("resize", () => {
   cy.resize()
   cy.fit()
-  console.log(animationSpeedMultiplier)
 })
 
 // Controls animation speed
 var animationSpeedMultiplier = 1
 $("#slider").on("change", () => {
   const value = $("#slider").prop("value")
-  // console.log(value)
   switch (true) {
     case (value < 5):
       animationSpeedMultiplier = 2
