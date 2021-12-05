@@ -260,13 +260,13 @@ async function main() {
       const redBoxMinAlpha = document.querySelector(`#${minAlpha[1].id()}`)
       redBoxMinAlpha.setAttribute("style", "border: 3px solid red;")
 
-      await timeout(5000 * animationSpeedMultiplier) //5000
+      await timeout(3000) //5000
       while (paused) await timeout(1000)
 
       // Prune
       minAlpha[1].children().successors().addClass("fade-out-node")
       minAlpha[1].children().successors().parent().addClass("fade-out-node")
-      await timeout(1000 * animationSpeedMultiplier)
+      await timeout(1000)
       while (paused) await timeout(1000)
       cy.remove(minAlpha[1].children().successors().parent())
 
