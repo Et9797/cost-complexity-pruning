@@ -75,16 +75,16 @@
                     for pruning trees that addresses the previous problem. Instead of considering every possible subtree,
                     it only considers the "best subtrees of their kind" by constructing a sequence of subtrees. 
                     In short, a cost function is assigned to a tree: \[C_{\alpha} = R(t) + \alpha \cdot |\tilde{T}|\]
-                    where \(C_{\alpha}\) is cost of the (sub)tree at a particular alpha value, \(R(t)\) the resubstitution
+                    where \(C_{\alpha}\) is the cost of the (sub)tree at a particular alpha value, \(R(t)\) the resubstitution
                     error, \(\alpha\) the tuning parameter, and \(|\tilde{T}|\) the number of leaf nodes. 
-                    Similar to L1/L2 regularization, a complex model (with more leaves) is penalized more than a simpler model.   
+                    Similar to L1/L2 regularization, a complex tree (with more leaves) is penalized more than a simpler tree.   
                     </p>
                     <p>
                     \(\alpha\) goes through a continuum of values, but there is only a finite number of subtrees of a tree. 
-                    It can be shown that we can construct a decreasing sequence of subtrees: \[T_1 > T_2 > T_3 > . . . > Root\] such that \(T_k\) is the "smallest minimizing
+                    It can be shown that a decreasing sequence of subtrees can be constructed: \[T_1 > T_2 > T_3 > . . . > Root\] such that \(T_k\) is the "smallest minimizing
                     subtree" for the range \(\alpha \in [\alpha_k, \alpha_{k+1})\). The next tree in the sequence is obtained simply 
                     by pruning the current subtree in the sequence. Concretely, the next subtree in the sequence is obtained by finding the non-terminal node(s) for which 
-                    \(g(t)\) (alpha) is lowest, and subsequently pruning that node. The process is repeated until the root node is reached.
+                    \(g(t)\) (alpha) is lowest, and subsequently pruning in that node. The process is repeated until the root node is reached.
                     \(g(t)\) is computed as follows for all non-terminal nodes of a subtree: \[g_k(t) = \cfrac{R(t) - R(T_{k, \ t})}{|\tilde T_{k, \ t}| - 1}\]
                     where \(R(t)\) is the resubstitution error of the node, \(R(T_{k, \ t})\) the resubstitution error for the branch of that node, and
                     \(|\tilde T_{k, \ t}|\) the number of leaf nodes of that branch. The non-terminal node(s) for which \(g(t)\) is smallest will be pruned away. 
