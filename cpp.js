@@ -69,7 +69,7 @@ var cy = window.cy = cytoscape({
       style: {
         'opacity': 0,
         'transition-property': 'opacity',
-        'transition-duration': '1s'
+        'transition-duration': '0.2s'
       } 
     }
 
@@ -128,6 +128,7 @@ var cy = window.cy = cytoscape({
 
 })
 
+// Controls resizing and refitting of the tree on the canvas
 window.addEventListener('load', () => {
   cy.fit()
 })
@@ -135,8 +136,28 @@ window.addEventListener('load', () => {
 window.addEventListener("resize", () => {
   cy.resize()
   cy.fit()
+  console.log(animationSpeedMultiplier)
 })
 
+// Controls animation speed
+var animationSpeedMultiplier = 1
+$("#slider").on("change", () => {
+  const value = $("#slider").prop("value")
+  // console.log(value)
+  switch (true) {
+    case (value < 5):
+      animationSpeedMultiplier = 2
+      break
+    case (value == 5):
+      animationSpeedMultiplier = 1
+      break
+    case (value > 5):
+      animationSpeedMultiplier = 1 / (value - 5 + 1) 
+      break
+  }
+})
+
+// Controls pausing and resuming
 var paused = false
 
 $("#reset-btn").on("click", () => window.location.reload())
@@ -188,13 +209,13 @@ async function main() {
       // Start animation
       const internalNodes = highlightInternalNodes()
 
-      await timeout(5000) //5000
+      await timeout(5000 * animationSpeedMultiplier) //5000
       while (paused) await timeout(1000)
 
       const g_internalNodes = []
       for (const node of internalNodes) {
 
-        // Compute alpha (g) for a branch
+        // Compute g (alpha) for a branch
         const branch = highlightBranch(node[0])
         const leafNodesBranch = branch.leaves()
         const noLeafNodes = leafNodesBranch.length
@@ -216,7 +237,7 @@ async function main() {
         $(".eqs").append(eq)
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, eq])
 
-        await timeout(5000) //5000
+        await timeout(5000 * animationSpeedMultiplier) //5000
         while (paused) await timeout(1000)
 
         branch.removeClass("green-outline")
@@ -234,22 +255,22 @@ async function main() {
 
       // Highlight lowest alpha
       internalNodes.forEach(n => n[0].removeClass("red-outline"))
-      await timeout(2000) //2000
+      await timeout(2000 * animationSpeedMultiplier) //2000
       while (paused) await timeout(1000)
       const redBoxMinAlpha = document.querySelector(`#${minAlpha[1].id()}`)
       redBoxMinAlpha.setAttribute("style", "border: 3px solid red;")
 
-      await timeout(5000) //5000
+      await timeout(5000 * animationSpeedMultiplier) //5000
       while (paused) await timeout(1000)
 
       // Prune
       minAlpha[1].children().successors().addClass("fade-out-node")
       minAlpha[1].children().successors().parent().addClass("fade-out-node")
-      await timeout(1000)
+      await timeout(1000 * animationSpeedMultiplier)
       while (paused) await timeout(1000)
       cy.remove(minAlpha[1].children().successors().parent())
 
-      await timeout(3000) //3000
+      await timeout(3000 * animationSpeedMultiplier) //3000
       while (paused) await timeout(1000)
       
       const bestSubTreeAlpha = document.createElement("p")

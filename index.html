@@ -37,9 +37,13 @@
                         <span id="subtree" style="font-size: 20px;">Current subtree:</span>
                     </div>
                 </div>
-                <div class="playback">
-                    <button id="resume-btn" style="width: 25%;" type="button" class="btn btn-success" disabled>Resume</button>
-                    <button id="pause-btn" style="width: 25%;" type="button" class="btn btn-danger" disabled>Pause</button>
+                <div class="playback d-flex">
+                    <div id="aniSpeedSlider" style="align-self: flex-start">
+                        <label for="aniSpeedSlider">Animation speed</label>
+                        <input type="range" min="1" max="20", value="5" class="form-range" id="slider">
+                    </div>
+                    <button id="resume-btn" style="width: 25%; align-self: center;" type="button" class="btn btn-success" disabled>Resume</button>
+                    <button id="pause-btn" style="width: 25%; align-self: center;" type="button" class="btn btn-danger" disabled>Pause</button>
                 </div>
                 <div style="text-align: left;" class="calculations">
                     <p style="margin: auto;"><strong>Calculations</strong></p>

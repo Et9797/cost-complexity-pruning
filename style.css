@@ -47,6 +47,10 @@ header a {
     padding-bottom: 20px;
 }
 
+.btn {
+    border-radius: 9999px;
+}
+
 .btn:focus {
     outline: none;
     box-shadow: none;
@@ -76,7 +80,8 @@ header a {
 
 .canvas .playback {
     grid-area: playback;
-    text-align: center;
+    justify-content: space-evenly;
+    padding: 10px;
 }
 
 .canvas .calculations {
@@ -124,6 +129,22 @@ header a {
 
     .canvas .calculations {
         padding-top: 0px;
+    }
+
+    .canvas .playback {
+        padding: 0;
+    }
+
+    .canvas .playback #resume-btn {
+        margin-left: 3rem;
+    }
+
+    .canvas .playback #pause-btn {
+        margin-right: 2rem;
+    }
+
+    #aniSpeedSlider {
+        margin-left: 2rem;
     }
 
     #cy {
