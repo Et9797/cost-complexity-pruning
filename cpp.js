@@ -140,6 +140,7 @@ window.addEventListener("resize", () => {
 
 // Controls animation speed
 var animationSpeedMultiplier = 1
+
 $("#slider").on("change", () => {
   const value = $("#slider").prop("value")
   switch (true) {
